@@ -1,0 +1,29 @@
+services:
+
+  wordpress:
+    image: wordpress:php8.1-apache
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: db_user
+      WORDPRESS_DB_PASSWORD: '123456'
+      WORDPRESS_DB_NAME: wp_db
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0-debian
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: Pgmnet00
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
